@@ -10,14 +10,13 @@ import wikipedia
 import cv2
 import numpy as np
 
-# Initialize text-to-speech engine
 engine = pyttsx3.init()
 engine.setProperty('rate', 190)
 engine.setProperty('volume', 1)
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[1].id)
 
-# Initialize YOLO object detection model
+
 yolo_net = cv2.dnn.readNet("C:/Users/snehi/Downloads/yolov3.weights", "C:/Users/snehi/Downloads/yolov3 (1).cfg")
 layer_names = yolo_net.getLayerNames()
 output_layers = [layer_names[i - 1] for i in yolo_net.getUnconnectedOutLayers()]
@@ -25,12 +24,9 @@ output_layers = [layer_names[i - 1] for i in yolo_net.getUnconnectedOutLayers()]
 with open("C:/Users/snehi/Downloads/coco (1).names", "r") as f:
     classes = [line.strip() for line in f.readlines()]
 
-# Global variables
 last_detected_object = None
 camera_on = False
 
-
-# Functions for assistant and object detection
 
 def speak(text):
     print(f": {text}")
@@ -337,7 +333,7 @@ def handle_query(query):
     return True
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     user_name = authenticate_user()
 
     if user_name:
